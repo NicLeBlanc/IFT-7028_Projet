@@ -49,6 +49,14 @@ def assignation_palette(df_palettisation):
     return df_palettisation
 
 
+def capacite_palette(df_palette):
+    df_capacite_palette = df_palette['Palette'].value_counts().to_frame()
+    df_capacite_palette.columns = ['Capacite']
+    df_capacite_palette['Palette'] = df_capacite_palette.index
+    test = df_capacite_palette.sort_values(by='Palette')
+    return test[['Palette', 'Capacite']]
+
+
 # Pour tout les classements de sous-type : mur, retour, coin, plafond
 # 1. En ordre (panneau 1, 2, 3, ... ,n-1, n)
 def heuristic_ordre(df):
@@ -112,9 +120,17 @@ def heuristic_sector_time(df):
 
 
 for project, df in dict_project.items():
-    heuristic_ordre(df).to_csv(r'results\heuristic_ordre_{}.csv'.format(project))
-    heuristic_type(df).to_csv(r'results\heuristic_type_{}.csv'.format(project))
-    heuristic_sector_random(df).to_csv(r'results\heuristic_sector_random_{}.csv'.format(project))
-    heuristic_sector(df).to_csv(r'results\heuristic_sector_{}.csv'.format(project))
-    heuristic_sector_type(df).to_csv(r'results\heuristic_sector_type_{}.csv'.format(project))
-    heuristic_sector_time(df).to_csv(r'results\heuristic_sector_time_{}.csv'.format(project))
+    heuristic_ordre(df).to_csv(r'ordre\heuristic_ordre_{}.csv'.format(project))
+    heuristic_type(df).to_csv(r'ordre\heuristic_type_{}.csv'.format(project))
+    heuristic_sector_random(df).to_csv(r'ordre\heuristic_sector_random_{}.csv'.format(project))
+    heuristic_sector(df).to_csv(r'ordre\heuristic_sector_{}.csv'.format(project))
+    heuristic_sector_type(df).to_csv(r'ordre\heuristic_sector_type_{}.csv'.format(project))
+    heuristic_sector_time(df).to_csv(r'ordre\heuristic_sector_time_{}.csv'.format(project))
+
+for project, df in dict_project.items():
+    capacite_palette(heuristic_ordre(df)).to_csv(r'palette\heuristic_type_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_type(df)).to_csv(r'palette\heuristic_sector_random_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_random(df)).to_csv(r'palette\heuristic_sector_random_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector(df)).to_csv(r'palette\heuristic_sector_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_type(df)).to_csv(r'palette\heuristic_sector_type_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_time(df)).to_csv(r'palette\heuristic_sector_time_{}.csv'.format(project), index=False)
