@@ -128,8 +128,8 @@ for project, df in dict_project.items():
     heuristic_sector_time(df).to_csv(r'ordre\heuristic_sector_time_{}.csv'.format(project))
 
 for project, df in dict_project.items():
-    capacite_palette(heuristic_ordre(df)).to_csv(r'palette\heuristic_type_{}.csv'.format(project), index=False)
-    capacite_palette(heuristic_type(df)).to_csv(r'palette\heuristic_sector_random_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_ordre(df)).to_csv(r'palette\heuristic_ordre_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_type(df)).to_csv(r'palette\heuristic_type_{}.csv'.format(project), index=False)
     capacite_palette(heuristic_sector_random(df)).to_csv(r'palette\heuristic_sector_random_{}.csv'.format(project), index=False)
     capacite_palette(heuristic_sector(df)).to_csv(r'palette\heuristic_sector_{}.csv'.format(project), index=False)
     capacite_palette(heuristic_sector_type(df)).to_csv(r'palette\heuristic_sector_type_{}.csv'.format(project), index=False)
