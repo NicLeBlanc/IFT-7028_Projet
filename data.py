@@ -120,17 +120,53 @@ def heuristic_sector_time(df):
 
 
 for project, df in dict_project.items():
-    heuristic_ordre(df).to_csv(r'ordre\heuristic_ordre_{}.csv'.format(project))
-    heuristic_type(df).to_csv(r'ordre\heuristic_type_{}.csv'.format(project))
-    heuristic_sector_random(df).to_csv(r'ordre\heuristic_sector_random_{}.csv'.format(project))
-    heuristic_sector(df).to_csv(r'ordre\heuristic_sector_{}.csv'.format(project))
-    heuristic_sector_type(df).to_csv(r'ordre\heuristic_sector_type_{}.csv'.format(project))
-    heuristic_sector_time(df).to_csv(r'ordre\heuristic_sector_time_{}.csv'.format(project))
+    heuristic_ordre(df).to_csv(r'actual\ordre\heuristic_ordre_{}.csv'.format(project))
+    heuristic_type(df).to_csv(r'actual\ordre\heuristic_type_{}.csv'.format(project))
+    heuristic_sector_random(df).to_csv(r'actual\ordre\heuristic_sector_random_{}.csv'.format(project))
+    heuristic_sector(df).to_csv(r'actual\ordre\heuristic_sector_{}.csv'.format(project))
+    heuristic_sector_type(df).to_csv(r'actual\ordre\heuristic_sector_type_{}.csv'.format(project))
+    heuristic_sector_time(df).to_csv(r'actual\ordre\heuristic_sector_time_{}.csv'.format(project))
+
+    capacite_palette(heuristic_ordre(df)).to_csv(r'actual\palette\heuristic_ordre_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_type(df)).to_csv(r'actual\palette\heuristic_type_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_random(df)).to_csv(r'actual\palette\heuristic_sector_random_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector(df)).to_csv(r'actual\palette\heuristic_sector_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_type(df)).to_csv(r'actual\palette\heuristic_sector_type_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_time(df)).to_csv(r'actual\palette\heuristic_sector_time_{}.csv'.format(project), index=False)
 
 for project, df in dict_project.items():
-    capacite_palette(heuristic_ordre(df)).to_csv(r'palette\heuristic_ordre_{}.csv'.format(project), index=False)
-    capacite_palette(heuristic_type(df)).to_csv(r'palette\heuristic_type_{}.csv'.format(project), index=False)
-    capacite_palette(heuristic_sector_random(df)).to_csv(r'palette\heuristic_sector_random_{}.csv'.format(project), index=False)
-    capacite_palette(heuristic_sector(df)).to_csv(r'palette\heuristic_sector_{}.csv'.format(project), index=False)
-    capacite_palette(heuristic_sector_type(df)).to_csv(r'palette\heuristic_sector_type_{}.csv'.format(project), index=False)
-    capacite_palette(heuristic_sector_time(df)).to_csv(r'palette\heuristic_sector_time_{}.csv'.format(project), index=False)
+    df_assignation_palette1 = heuristic_sector(df)
+    df_assignation_palette2 = df_assignation_palette1[['No', 'Palette']]
+
+    heuristic_ordre_df = (heuristic_ordre(df)).drop('Palette', 1)
+    heuristic_type_df = (heuristic_type(df)).drop('Palette', 1)
+    heuristic_sector_random_df = (heuristic_sector_random(df)).drop('Palette', 1)
+    heuristic_sector_df = (heuristic_sector(df)).drop('Palette', 1)
+    heuristic_sector_type_df = (heuristic_sector_type(df)).drop('Palette', 1)
+    heuristic_sector_time_df = heuristic_sector_time(df).drop('Palette', 1)
+
+    heuristic_ordre_df2 = heuristic_ordre_df.merge(df_assignation_palette2, on='No', how='left')
+    heuristic_type_df2 = heuristic_type_df.merge(df_assignation_palette2, on='No', how='left')
+    heuristic_sector_random_df2 = heuristic_sector_random_df.merge(df_assignation_palette2, on='No', how='left')
+    heuristic_sector_df2 = heuristic_sector_df.merge(df_assignation_palette2, on='No', how='left')
+    heuristic_sector_type_df2 = heuristic_sector_type_df.merge(df_assignation_palette2, on='No', how='left')
+    heuristic_sector_time_df2 = heuristic_sector_time_df.merge(df_assignation_palette2, on='No', how='left')
+
+    heuristic_ordre_df2.to_csv(r'test\ordre\heuristic_ordre_{}.csv'.format(project))
+    heuristic_type_df2.to_csv(r'test\ordre\heuristic_type_{}.csv'.format(project))
+    heuristic_sector_random_df2.to_csv(r'test\ordre\heuristic_sector_random_{}.csv'.format(project))
+    heuristic_sector_df2.to_csv(r'test\ordre\heuristic_sector_{}.csv'.format(project))
+    heuristic_sector_type_df2.to_csv(r'test\ordre\heuristic_sector_type_{}.csv'.format(project))
+    heuristic_sector_time_df2.to_csv(r'test\ordre\heuristic_sector_time_{}.csv'.format(project))
+
+    capacite_palette(heuristic_ordre_df2).to_csv(r'test\palette\heuristic_ordre_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_type_df2).to_csv(r'test\palette\heuristic_type_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_random_df2).to_csv(r'test\palette\heuristic_sector_random_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_df2).to_csv(r'test\palette\heuristic_sector_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_type_df2).to_csv(r'test\palette\heuristic_sector_type_{}.csv'.format(project), index=False)
+    capacite_palette(heuristic_sector_time_df2).to_csv(r'test\palette\heuristic_sector_time_{}.csv'.format(project), index=False)
+
+
+
+
+
